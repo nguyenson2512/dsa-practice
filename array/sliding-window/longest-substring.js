@@ -3,24 +3,22 @@
  * @return {number}
  */
 var lengthOfLongestSubstring = function (s) {
-  let left = 0,
-    right = 0,
-    result = 0;
-  let hash = {};
-  for (let i = 0; i < s.length; i++) {
-    if (hash[s[i]]) {
-      hash = {};
-      hash[s[i]] = 1;
-      left = i;
-      result = Math.max(result, right - left);
-    } else {
-      hash[s[i]] = 1;
-      right++;
-      result = Math.max(result, right - left);
+  let ans = 0;
+  let set = new Set(), i = 0;
+  for (let j = 0; j < s.length; j++) {
+    while (set.has(s[j])) {
+      set.delete(s[i])
+      i++;
     }
+    set.add(s[j])
+    ans = Math.max(ans, j - i + 1);
   }
-  return result;
+  return ans;
 };
 
+console.log(lengthOfLongestSubstring("pwwkew"));
+//3
+console.log(lengthOfLongestSubstring("bbbb"));
+//1
 console.log(lengthOfLongestSubstring("abcabcbb"));
 //3
