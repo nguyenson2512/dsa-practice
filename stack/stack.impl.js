@@ -40,3 +40,48 @@ test.push(33);
 test.push(4);
 test.pop();
 console.log(test);
+
+class Node {
+  constructor(data) {
+      this.data = data;
+      this.next = null;
+  }
+}
+
+class LinkedListBasedStack {
+  constructor() {
+    this.top = null;
+    this.size = 0;
+  }
+
+  push(data) {
+    const newNode = new Node(data);
+    newNode.next = this.top;
+    this.top = newNode;
+    this.size++;
+  }
+
+  pop() {
+    if(!this.top) {
+      return null
+    }
+    const poppedValue = this.top.data
+    this.top = this.top.next
+    this.size--;
+    return poppedValue
+  }
+
+  peek() {
+    if(!this.top) {
+      return null
+    }
+    return this.top.data
+  }
+}
+
+const llStack = new LinkedListBasedStack();
+llStack.push(1)
+llStack.push(2)
+console.log('==========', llStack);
+llStack.pop()
+console.log(llStack.peek());
