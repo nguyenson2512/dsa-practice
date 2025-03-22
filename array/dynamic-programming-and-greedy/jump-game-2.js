@@ -3,7 +3,7 @@ function jump(nums) {
   // currentEnd: The farthest index we can reach using the current number of jumps.
   let jumps = 0, maxReachIndex = 0, currentEnd = 0;
   // Your solution goes here
-  for (let i = 0; i < nums.length; i++) {
+  for (let i = 0; i < nums.length - 1; i++) {
     maxReachIndex = Math.max(maxReachIndex, nums[i] + i);
     if (currentEnd == i) {
       jumps++;
