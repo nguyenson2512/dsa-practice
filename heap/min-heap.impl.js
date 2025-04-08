@@ -38,6 +38,7 @@ class MinHeap {
     return this.heap[0]
   }
 
+  // O(log n)
   _heapifyUp() {
     // index cua phan tu moi them vao mang heap
     let index = this.heap.length - 1;
@@ -50,6 +51,8 @@ class MinHeap {
       index = parentIndex
     }
   }
+
+  // O(log n)
   _heapifyDown() {
     let index = 0;
     let len = this.heap.length;
@@ -69,6 +72,34 @@ class MinHeap {
       index = smallest
     }
   }
+
+  // O(n)
+  buildMinHeap(arr) {
+    let n = arr.length;
+    //Duyệt từ phần tử có chỉ số n/2 - 1 (vì tất cả các node sau đó đều là lá)
+    for (let i = Math.floor(n / 2) - 1; i >= 0; i--) {
+      this._heapify(arr, n, i)
+    }
+    this.heap = arr;
+  }
+
+  _heapify(arr, n, i) {
+    let smallest = i;
+    let left = i * 2 + 1;
+    let right = i * 2 + 2;
+
+    if (left < n && arr[left] < arr[smallest]) {
+      smallest = left;
+    }
+    if (right < n && arr[right] < arr[smallest]) {
+      smallest = right;
+    }
+
+    if (smallest !== i) {
+      [arr[i], arr[smallest]] = [arr[smallest], arr[i]];
+      this._heapify(arr, n, smallest)
+    };
+  }
 }
 
 const heap = new MinHeap();
@@ -83,3 +114,10 @@ console.log(heap.peek());
 console.log(heap.remove());
 console.log(heap);
 console.log(heap.peek());
+console.log(heap.remove());
+console.log(heap.remove());
+console.log(heap.remove());
+console.log(heap);
+heap.buildMinHeap([10, 4, 15, 1])
+console.log(heap);
+
