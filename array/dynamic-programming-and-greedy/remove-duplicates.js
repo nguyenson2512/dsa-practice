@@ -1,3 +1,5 @@
+//two pointer
+
 function removeDuplicates(nums) {
   // Your solution goes here\
   let k = 2;
